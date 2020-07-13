@@ -8,11 +8,24 @@
 
 import SpriteKit
 import GameplayKit
+import UIKit
 
 class GameScene: SKScene {
     
+    var basket: SKSpriteNode!
+    var scoreLabel: SKLabelNode!
+    
+    var score: Int = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
+    
+    var livesArray: [SKSpriteNode]!
+    
     override func didMove(to view: SKView) {
         createBackground()
+        createBasket()
     }
     
     func createBackground(){
@@ -23,12 +36,28 @@ class GameScene: SKScene {
         self.addChild(background)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+    func createBasket(){
+        basket = SKSpriteNode(imageNamed: "basket")
+        basket.size = CGSize(width: 75, height: 70)
+        basket.position = CGPoint(x: 150, y: 50)
+        self.addChild(basket)
+        
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
+    func createFruit(){
         
+    }
+    
+    func createDebris(){
+        
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in (touches) {
+            let location = touch.location(in: self)
+            basket.position = CGPoint(x: location.x, y: 50)
+        }
     }
     
     

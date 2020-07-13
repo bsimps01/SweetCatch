@@ -17,6 +17,7 @@
 		1B3193C524BA67C100C6C87D /* SweetCatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3193C424BA67C100C6C87D /* SweetCatchTests.swift */; };
 		1B3193D024BA67C100C6C87D /* SweetCatchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3193CF24BA67C100C6C87D /* SweetCatchUITests.swift */; };
 		1B3193DE24BB9FB900C6C87D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1B3193DD24BB9FB900C6C87D /* GameScene.sks */; };
+		1B3193E324BBCE2900C6C87D /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3193E224BBCE2900C6C87D /* Fruit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		1B3193CF24BA67C100C6C87D /* SweetCatchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweetCatchUITests.swift; sourceTree = "<group>"; };
 		1B3193D124BA67C100C6C87D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B3193DD24BB9FB900C6C87D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		1B3193E224BBCE2900C6C87D /* Fruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				1B3193DD24BB9FB900C6C87D /* GameScene.sks */,
 				1B3193AF24BA67BE00C6C87D /* GameScene.swift */,
 				1B3193B124BA67BE00C6C87D /* GameViewController.swift */,
+				1B3193E424BBCE3400C6C87D /* Sprites */,
 				1B3193B324BA67BE00C6C87D /* Main.storyboard */,
 				1B3193B624BA67C100C6C87D /* Assets.xcassets */,
 				1B3193B824BA67C100C6C87D /* LaunchScreen.storyboard */,
@@ -132,6 +135,14 @@
 				1B3193D124BA67C100C6C87D /* Info.plist */,
 			);
 			path = SweetCatchUITests;
+			sourceTree = "<group>";
+		};
+		1B3193E424BBCE3400C6C87D /* Sprites */ = {
+			isa = PBXGroup;
+			children = (
+				1B3193E224BBCE2900C6C87D /* Fruit.swift */,
+			);
+			path = Sprites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B3193E324BBCE2900C6C87D /* Fruit.swift in Sources */,
 				1B3193B024BA67BE00C6C87D /* GameScene.swift in Sources */,
 				1B3193B224BA67BE00C6C87D /* GameViewController.swift in Sources */,
 				1B3193AA24BA67BE00C6C87D /* AppDelegate.swift in Sources */,
