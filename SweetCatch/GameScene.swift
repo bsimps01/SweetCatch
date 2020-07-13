@@ -10,10 +10,15 @@ import SpriteKit
 import GameplayKit
 import UIKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var basket: SKSpriteNode!
     var scoreLabel: SKLabelNode!
+    var fruitCollection = ["apple", "banana", "grapefruit", "lemon", "lime", "orange", "peach", "pear", "strawberry"]
+    let fruitCategory: UInt32 = 0x1 << 1
+    let badFruitCategory: UInt32 = 0x1 << 1
+    let basketCategory: UInt32 = 0x1 << 0
+    var gameTimer: Timer!
     
     var score: Int = 0 {
         didSet {
@@ -23,9 +28,16 @@ class GameScene: SKScene {
     
     var livesArray: [SKSpriteNode]!
     
+    
+    
     override func didMove(to view: SKView) {
         createBackground()
         createBasket()
+        //createFruit()
+        physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVector(dx: 0, dy: -1.0)
+        let timeInterval = 0.75
+        gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addFruit), userInfo: nil, repeats: true)
     }
     
     func createBackground(){
@@ -40,17 +52,46 @@ class GameScene: SKScene {
         basket = SKSpriteNode(imageNamed: "basket")
         basket.size = CGSize(width: 75, height: 70)
         basket.position = CGPoint(x: 150, y: 50)
+        basket.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
+        basket.physicsBody?.isDynamic = false
+        basket.physicsBody?.categoryBitMask = PhysicsCategory.Basket
         self.addChild(basket)
         
     }
     
     
-    func createFruit(){
+    @objc func addFruit(){
+        
+        fruitCollection = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: fruitCollection) as! [String]
+        
+        let fruit = SKSpriteNode(imageNamed: fruitCollection[0])
+        let randomFruit = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.frame.size.width))
+        let position = CGFloat(randomFruit.nextInt())
+        fruit.position = CGPoint(x: position, y: self.frame.size.height + fruit.size.height)
+        fruit.size = CGSize(width: 30, height: 30)
+        fruit.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
+        fruit.physicsBody?.isDynamic = true
+        fruit.physicsBody?.categoryBitMask = fruitCategory
+        fruit.physicsBody?.collisionBitMask = 0
+        
+        fruit.physicsBody?.affectedByGravity = true
+        fruit.physicsBody?.categoryBitMask = PhysicsCategory.Fruit
+        fruit.physicsBody?.contactTestBitMask = PhysicsCategory.Basket
+        fruit.physicsBody?.collisionBitMask = PhysicsCategory.Basket
         
     }
     
-    func createDebris(){
+    @objc func createBadApple(){
         
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let collision: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        if collision == PhysicsCategory.Basket | PhysicsCategory.Fruit {
+            self.score += 1
+            let fruitCatch = SKAction.playSoundFileNamed("basketPop.mp3", waitForCompletion: false)
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
