@@ -20,6 +20,9 @@
 		1B3193E324BBCE2900C6C87D /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3193E224BBCE2900C6C87D /* Fruit.swift */; };
 		1B3193E624BCED2600C6C87D /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3193E524BCED2600C6C87D /* PhysicsCategory.swift */; };
 		1B3193E924BCF9C300C6C87D /* basketPop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B3193E824BCF9C200C6C87D /* basketPop.mp3 */; };
+		1B3193EB24BD43C100C6C87D /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3193EA24BD43C100C6C87D /* GameOverScene.swift */; };
+		1B3193EF24BD4D9200C6C87D /* badFruitSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B3193EE24BD4D9200C6C87D /* badFruitSound.mp3 */; };
+		1B3193F124BD4F2200C6C87D /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B3193F024BD4F2200C6C87D /* backgroundMusic.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,9 @@
 		1B3193E224BBCE2900C6C87D /* Fruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
 		1B3193E524BCED2600C6C87D /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		1B3193E824BCF9C200C6C87D /* basketPop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = basketPop.mp3; sourceTree = "<group>"; };
+		1B3193EA24BD43C100C6C87D /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		1B3193EE24BD4D9200C6C87D /* badFruitSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = badFruitSound.mp3; sourceTree = "<group>"; };
+		1B3193F024BD4F2200C6C87D /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,13 +118,13 @@
 				1B3193A924BA67BE00C6C87D /* AppDelegate.swift */,
 				1B3193AD24BA67BE00C6C87D /* Actions.sks */,
 				1B3193DD24BB9FB900C6C87D /* GameScene.sks */,
-				1B3193AF24BA67BE00C6C87D /* GameScene.swift */,
+				1B3193EC24BD43CA00C6C87D /* Scenes */,
 				1B3193E724BCEE9300C6C87D /* Model */,
 				1B3193B124BA67BE00C6C87D /* GameViewController.swift */,
 				1B3193E424BBCE3400C6C87D /* Sprites */,
 				1B3193B324BA67BE00C6C87D /* Main.storyboard */,
 				1B3193B624BA67C100C6C87D /* Assets.xcassets */,
-				1B3193E824BCF9C200C6C87D /* basketPop.mp3 */,
+				1B3193ED24BD4D6500C6C87D /* Sounds */,
 				1B3193B824BA67C100C6C87D /* LaunchScreen.storyboard */,
 				1B3193BB24BA67C100C6C87D /* Info.plist */,
 			);
@@ -157,6 +163,25 @@
 				1B3193E524BCED2600C6C87D /* PhysicsCategory.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1B3193EC24BD43CA00C6C87D /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1B3193EA24BD43C100C6C87D /* GameOverScene.swift */,
+				1B3193AF24BA67BE00C6C87D /* GameScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		1B3193ED24BD4D6500C6C87D /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				1B3193F024BD4F2200C6C87D /* backgroundMusic.mp3 */,
+				1B3193EE24BD4D9200C6C87D /* badFruitSound.mp3 */,
+				1B3193E824BCF9C200C6C87D /* basketPop.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +289,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B3193B524BA67BE00C6C87D /* Main.storyboard in Resources */,
+				1B3193EF24BD4D9200C6C87D /* badFruitSound.mp3 in Resources */,
+				1B3193F124BD4F2200C6C87D /* backgroundMusic.mp3 in Resources */,
 				1B3193DE24BB9FB900C6C87D /* GameScene.sks in Resources */,
 				1B3193E924BCF9C300C6C87D /* basketPop.mp3 in Resources */,
 				1B3193B724BA67C100C6C87D /* Assets.xcassets in Resources */,
@@ -297,6 +324,7 @@
 				1B3193B024BA67BE00C6C87D /* GameScene.swift in Sources */,
 				1B3193E624BCED2600C6C87D /* PhysicsCategory.swift in Sources */,
 				1B3193B224BA67BE00C6C87D /* GameViewController.swift in Sources */,
+				1B3193EB24BD43C100C6C87D /* GameOverScene.swift in Sources */,
 				1B3193AA24BA67BE00C6C87D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

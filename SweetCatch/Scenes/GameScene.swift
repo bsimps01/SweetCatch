@@ -19,13 +19,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let badFruitCategory: UInt32 = 0x1 << 1
     let basketCategory: UInt32 = 0x1 << 0
     var gameTimer: Timer!
-    
+    var badGameTimer: Timer!
     var score: Int = 0 {
         didSet {
             scoreLabel.text = "Score: \(score)"
         }
     }
-    
     var livesArray: [SKSpriteNode]!
     
     
@@ -35,18 +34,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createBasket()
         //createFruit()
         physicsWorld.contactDelegate = self
-        physicsWorld.gravity = CGVector(dx: 0, dy: -1.0)
+        physicsWorld.gravity = CGVector(dx: 0, dy: -1.5)
         let timeInterval = 0.75
+        let timerInterval2 = 1.5
         gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addFruit), userInfo: nil, repeats: true)
-        
+        badGameTimer = Timer.scheduledTimer(timeInterval: timerInterval2, target: self, selector: #selector(createBadApple), userInfo: nil, repeats: true)
         scoreLabel = SKLabelNode(text: "Score: \(score)")
         scoreLabel.position = CGPoint(x: 70, y: self.frame.size.height - 70)
         scoreLabel.fontName = "Marker Felt Wide"
         scoreLabel.fontSize = 30
         scoreLabel.fontColor = UIColor.yellow
         score = 0
-        
         self.addChild(scoreLabel)
+        let backgroundMusic = SKAction.playSoundFileNamed("backgroundMusic.mp3", waitForCompletion: false)
+         self.run(backgroundMusic)
+        addLives()
     }
     
     func createBackground(){
@@ -68,6 +70,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func addLives(){
+        livesArray = [SKSpriteNode]()
+        
+        for live in 1...3 {
+            let liveNode = SKSpriteNode(imageNamed: "basket")
+            liveNode.size = CGSize(width: 25, height: 25)
+            liveNode.position = CGPoint(x: self.frame.size.width - CGFloat(4 - live) * liveNode.size.width, y: self.frame.size.height - 60)
+            self.addChild(liveNode)
+            livesArray.append(liveNode)
+        }
+    }
+    
     
     @objc func addFruit(){
         
@@ -76,6 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let fruit = SKSpriteNode(imageNamed: fruitCollection[0])
         let randomFruit = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.frame.size.width))
         let position = CGFloat(randomFruit.nextInt())
+        
         fruit.position = CGPoint(x: position, y: self.frame.size.height + fruit.size.height)
         fruit.size = CGSize(width: 40, height: 40)
         fruit.physicsBody = SKPhysicsBody(circleOfRadius: fruit.size.width/2)
@@ -91,10 +106,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func createBadApple(){
+        let badFruit = SKSpriteNode(imageNamed: "rottenFruit")
+        let randomFruit = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.frame.size.width))
+        let position = CGFloat(randomFruit.nextInt())
         
+        badFruit.position = CGPoint(x: position, y: self.frame.size.height + badFruit.size.height)
+        badFruit.size = CGSize(width: 35, height: 35)
+        badFruit.physicsBody = SKPhysicsBody(circleOfRadius: badFruit.size.width/2)
+        badFruit.physicsBody?.isDynamic = true
+        badFruit.physicsBody?.categoryBitMask = PhysicsCategory.BadFruit
+        badFruit.physicsBody?.contactTestBitMask = PhysicsCategory.Basket
+        badFruit.physicsBody?.collisionBitMask = PhysicsCategory.Basket
+        self.addChild(badFruit)
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        
         let collision: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
         if collision == PhysicsCategory.Basket | PhysicsCategory.Fruit {
@@ -104,6 +131,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             contact.bodyB.node?.removeFromParent()
 
+        }else if collision == PhysicsCategory.Basket | PhysicsCategory.BadFruit{
+            
+            let badFruitCatch = SKAction.playSoundFileNamed("badFruitSound.mp3", waitForCompletion: false)
+            self.run(badFruitCatch)
+            
+            if self.livesArray.count > 0 {
+                let liveNode = self.livesArray.first
+                liveNode!.removeFromParent()
+                self.livesArray.removeFirst()
+                contact.bodyB.node?.removeFromParent()
+                
+                if self.livesArray.count == 0 {
+                    //Game Over Transistion screen
+                    let transition = SKTransition.crossFade(withDuration: 0.2)
+                    let gameOver = GameOverScene(size: (self.view?.bounds.size)!)
+                    gameOver.finalScore = self.score
+                    self.view?.presentScene(gameOver, transition: transition)
+                }
+            }
         }
     }
     
@@ -117,5 +163,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+ 
     }
 }
