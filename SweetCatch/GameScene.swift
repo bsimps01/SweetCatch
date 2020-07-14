@@ -38,6 +38,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = CGVector(dx: 0, dy: -1.0)
         let timeInterval = 0.75
         gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addFruit), userInfo: nil, repeats: true)
+        
+        scoreLabel = SKLabelNode(text: "Score: \(score)")
+        scoreLabel.position = CGPoint(x: 70, y: self.frame.size.height - 70)
+        scoreLabel.fontName = "Marker Felt Wide"
+        scoreLabel.fontSize = 30
+        scoreLabel.fontColor = UIColor.yellow
+        score = 0
+        
+        self.addChild(scoreLabel)
     }
     
     func createBackground(){
@@ -52,7 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         basket = SKSpriteNode(imageNamed: "basket")
         basket.size = CGSize(width: 75, height: 70)
         basket.position = CGPoint(x: 150, y: 50)
-        basket.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
+        basket.physicsBody = SKPhysicsBody(circleOfRadius: basket.size.width/2)
         basket.physicsBody?.isDynamic = false
         basket.physicsBody?.categoryBitMask = PhysicsCategory.Basket
         self.addChild(basket)
@@ -68,8 +77,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let randomFruit = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.frame.size.width))
         let position = CGFloat(randomFruit.nextInt())
         fruit.position = CGPoint(x: position, y: self.frame.size.height + fruit.size.height)
-        fruit.size = CGSize(width: 30, height: 30)
-        fruit.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
+        fruit.size = CGSize(width: 40, height: 40)
+        fruit.physicsBody = SKPhysicsBody(circleOfRadius: fruit.size.width/2)
         fruit.physicsBody?.isDynamic = true
         fruit.physicsBody?.categoryBitMask = fruitCategory
         fruit.physicsBody?.collisionBitMask = 0
@@ -78,7 +87,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fruit.physicsBody?.categoryBitMask = PhysicsCategory.Fruit
         fruit.physicsBody?.contactTestBitMask = PhysicsCategory.Basket
         fruit.physicsBody?.collisionBitMask = PhysicsCategory.Basket
-        
+        self.addChild(fruit)
     }
     
     @objc func createBadApple(){
@@ -91,6 +100,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if collision == PhysicsCategory.Basket | PhysicsCategory.Fruit {
             self.score += 1
             let fruitCatch = SKAction.playSoundFileNamed("basketPop.mp3", waitForCompletion: false)
+            self.run(fruitCatch)
+            
+            contact.bodyB.node?.removeFromParent()
+
         }
     }
     
