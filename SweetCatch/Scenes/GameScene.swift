@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 import UIKit
+import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -27,6 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     var livesArray: [SKSpriteNode]!
     
+    public var backgroundMusicPlayer: AVAudioPlayer?
     
     
     override func didMove(to view: SKView) {
@@ -46,8 +48,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontColor = UIColor.yellow
         score = 0
         self.addChild(scoreLabel)
-        let backgroundMusic = SKAction.playSoundFileNamed("backgroundMusic.mp3", waitForCompletion: false)
-         self.run(backgroundMusic)
+//        let backgroundMusic = SKAction.playSoundFileNamed("backgroundMusic.mp3", waitForCompletion: false)
+//         self.run(backgroundMusic)
+        
+//        if let musicURL = Bundle.main.url(forResource: "backgroundMusic.mp3", withExtension: "Sounds"){
+//            backgroundMusic = SKAudioNode(url: musicURL)
+//            addChild(backgroundMusic)
+//        }
+        playBackgroundMusic("backgroundMusic.mp3")
         addLives()
     }
     
@@ -82,6 +90,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    public func playBackgroundMusic(_ filename: String) {
+      let url = Bundle.main.url(forResource: "backgroundMusic.mp3", withExtension: nil)
+      if (url == nil) {
+        print("Could not find file: \(filename)")
+        return
+      }
+
+      var error: NSError? = nil
+      do {
+        backgroundMusicPlayer = try AVAudioPlayer(contentsOf: url!)
+      } catch let error1 as NSError {
+        error = error1
+        backgroundMusicPlayer = nil
+      }
+      if let player = backgroundMusicPlayer {
+        player.numberOfLoops = -1
+        player.prepareToPlay()
+        player.play()
+      } else {
+        print("Could not create audio player: \(error!)")
+      }
+    }
+    
     
     @objc func addFruit(){
         
@@ -111,7 +142,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let position = CGFloat(randomFruit.nextInt())
         
         badFruit.position = CGPoint(x: position, y: self.frame.size.height + badFruit.size.height)
-        badFruit.size = CGSize(width: 35, height: 35)
+        badFruit.size = CGSize(width: 50, height: 50)
         badFruit.physicsBody = SKPhysicsBody(circleOfRadius: badFruit.size.width/2)
         badFruit.physicsBody?.isDynamic = true
         badFruit.physicsBody?.categoryBitMask = PhysicsCategory.BadFruit
@@ -121,7 +152,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        
+
         let collision: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
         if collision == PhysicsCategory.Basket | PhysicsCategory.Fruit {
@@ -144,6 +175,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 if self.livesArray.count == 0 {
                     //Game Over Transistion screen
+                    //backgroundMusic.run(SKAction.stop())
+                    backgroundMusicPlayer!.stop()
                     let transition = SKTransition.crossFade(withDuration: 0.2)
                     let gameOver = GameOverScene(size: (self.view?.bounds.size)!)
                     gameOver.finalScore = self.score

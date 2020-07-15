@@ -14,8 +14,8 @@ class GameOverScene: SKScene {
     var gameOverLabel = SKLabelNode(text: "Game Over")
     let scoreLabel = SKLabelNode()
     var finalScore = 0
-    var playAgainLabel = SKSpriteNode(imageNamed: "bar")
-
+    let highestScore = SKLabelNode(fontNamed: "American Typewriter")
+    let scoreKey = "scoreKey"
 
     override init(size: CGSize) {
         // do initial configuration work here
@@ -32,43 +32,68 @@ class GameOverScene: SKScene {
     }
 
     override func didMove(to view: SKView) {
-
+        let soundOver = SKAction.playSoundFileNamed("gameOverSound.mp3", waitForCompletion: false)
+        self.run(soundOver)
+        
+        let background = SKSpriteNode(imageNamed: "background")
+        background.size = UIScreen.main.bounds.size
+        background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        background.zPosition = 2
+        self.addChild(background)
+        createButton()
         createLabels()
+        //setHighestScore()
+    
     }
     
     func createLabels(){
-        scoreLabel.text = "Score: \(finalScore)"
+        scoreLabel.text = "Final Score: \(finalScore)"
+        scoreLabel.fontName = "Marker Felt Wide"
         scoreLabel.fontColor = .yellow
+        scoreLabel.fontSize = 30
         scoreLabel.position = CGPoint(x: size.width / 2, y: 400)
+        scoreLabel.zPosition = 3
         self.addChild(scoreLabel)
         
         addChild(gameOverLabel)
         gameOverLabel.fontSize = 32.0
         gameOverLabel.color = SKColor.white
-        gameOverLabel.fontName = "Thonburi-Bold"
+        gameOverLabel.fontName = "Marker Felt Wide"
+        gameOverLabel.zPosition = 3
         gameOverLabel.position = CGPoint(x: size.width / 2, y: 500)
-        
-        playAgainLabel.position = CGPoint(x: size.width / 2, y: 300)
-        playAgainLabel.value(forAttributeNamed: "Restart")
-        playAgainLabel.size = CGSize(width: 200, height: 100)
-        addChild(playAgainLabel)
     }
-    
 
-    
-
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        
-        if let location = touch?.location(in: self){
-            let nodesArray = self.nodes(at: location)
+        func createButton(){
+            //Button
+            let buttonTexture = SKTexture(imageNamed: "button")
+            let buttonSelected = SKTexture(imageNamed: "button2")
             
-            if ((nodesArray.first?.name = "playAgainLabel") != nil) {
-                let transition = SKTransition.fade(withDuration: 0.5)
-                let gameScene = GameScene(size: self.size)
-                self.view?.presentScene(gameScene, transition: transition)
-            }
+            let button = ButtonNode(normalTexture: buttonTexture, selectedTexture: buttonSelected, disabledTexture: buttonTexture)
+            button.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(GameOverScene.buttonTap))
+            button.setButtonLabel(title: "Play Again", font: "Helvetica", fontSize: 20)
+            button.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 70)
+            button.size = CGSize(width: 300, height: 100)
+            button.zPosition = 4
+            self.addChild(button)
         }
+        
+        @objc func buttonTap(){
+            let gameScene = GameScene(size: (self.view?.bounds.size)!)
+
+            gameScene.scaleMode = .aspectFill
+            let crossFade = SKTransition.crossFade(withDuration: 0.75)
+            if let spriteview = self.view{
+                spriteview.presentScene(gameScene, transition: crossFade)
+            }
+
+        }
+    func setHighestScore(){
+        highestScore.text = "Highest Score: 10000"
+        highestScore.fontColor = .orange
+        highestScore.fontSize = 30
+        highestScore.position = CGPoint(x: size.width / 2, y: 800)
+        highestScore.zPosition = 3
+        self.addChild(highestScore)
+    
     }
 }
