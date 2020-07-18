@@ -39,8 +39,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = CGVector(dx: 0, dy: -1.5)
         let timeInterval = 0.75
         let timerInterval2 = 1.5
+        
         gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addFruit), userInfo: nil, repeats: true)
         badGameTimer = Timer.scheduledTimer(timeInterval: timerInterval2, target: self, selector: #selector(createBadApple), userInfo: nil, repeats: true)
+        
         scoreLabel = SKLabelNode(text: "Score: \(score)")
         scoreLabel.position = CGPoint(x: 70, y: self.frame.size.height - 70)
         scoreLabel.fontName = "Marker Felt Wide"

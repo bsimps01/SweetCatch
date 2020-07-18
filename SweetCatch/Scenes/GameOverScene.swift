@@ -13,7 +13,7 @@ class GameOverScene: SKScene {
     
     var gameOverLabel = SKLabelNode(text: "Game Over")
     let scoreLabel = SKLabelNode()
-    var finalScore = 0
+    var finalScore: Int!
     let highestScore = SKLabelNode(fontNamed: "American Typewriter")
     let scoreKey = "scoreKey"
 
@@ -42,12 +42,12 @@ class GameOverScene: SKScene {
         self.addChild(background)
         createButton()
         createLabels()
-        //setHighestScore()
+        setHighestScore()
     
     }
     
     func createLabels(){
-        scoreLabel.text = "Final Score: \(finalScore)"
+        scoreLabel.text = "Final Score: \(finalScore!)"
         scoreLabel.fontName = "Marker Felt Wide"
         scoreLabel.fontColor = .yellow
         scoreLabel.fontSize = 30
@@ -70,7 +70,7 @@ class GameOverScene: SKScene {
             
             let button = ButtonNode(normalTexture: buttonTexture, selectedTexture: buttonSelected, disabledTexture: buttonTexture)
             button.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(GameOverScene.buttonTap))
-            button.setButtonLabel(title: "Play Again", font: "Helvetica", fontSize: 20)
+            button.setButtonLabel(title: "Play Again", font: "Marker Felt", fontSize: 20)
             button.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 70)
             button.size = CGSize(width: 300, height: 100)
             button.zPosition = 4
@@ -85,14 +85,20 @@ class GameOverScene: SKScene {
             if let spriteview = self.view{
                 spriteview.presentScene(gameScene, transition: crossFade)
             }
-
         }
+    
     func setHighestScore(){
-        highestScore.text = "Highest Score: 10000"
+        let score = UserDefaults.standard.integer(forKey: "score")
+        if finalScore > score{
+            UserDefaults.standard.set(finalScore, forKey: "score")
+            highestScore.text = "Highest Score: \(finalScore!)"
+        }else{
+            highestScore.text = "Highest Score: \(score)"
+        }
         highestScore.fontColor = .orange
         highestScore.fontSize = 30
-        highestScore.position = CGPoint(x: size.width / 2, y: 800)
-        highestScore.zPosition = 3
+        highestScore.position = CGPoint(x: size.width / 2, y: 600)
+        highestScore.zPosition = 4
         self.addChild(highestScore)
     
     }
