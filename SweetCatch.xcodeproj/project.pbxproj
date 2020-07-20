@@ -25,6 +25,7 @@
 		1B3193F324BD6F7B00C6C87D /* gameOverSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B3193F224BD6F7B00C6C87D /* gameOverSound.mp3 */; };
 		1B3193F724BE699500C6C87D /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3193F624BE699500C6C87D /* ButtonNode.swift */; };
 		1BA41A9D24C108CA003EAEA4 /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA41A9C24C108C9003EAEA4 /* Fruit.swift */; };
+		1BA41A9F24C646B8003EAEA4 /* BadFruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA41A9E24C646B8003EAEA4 /* BadFruit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		1B3193F224BD6F7B00C6C87D /* gameOverSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOverSound.mp3; sourceTree = "<group>"; };
 		1B3193F624BE699500C6C87D /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		1BA41A9C24C108C9003EAEA4 /* Fruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
+		1BA41A9E24C646B8003EAEA4 /* BadFruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadFruit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				1B3193F624BE699500C6C87D /* ButtonNode.swift */,
 				1B3193E524BCED2600C6C87D /* PhysicsCategory.swift */,
 				1BA41A9C24C108C9003EAEA4 /* Fruit.swift */,
+				1BA41A9E24C646B8003EAEA4 /* BadFruit.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			files = (
 				1B3193B024BA67BE00C6C87D /* GameScene.swift in Sources */,
 				1B3193E624BCED2600C6C87D /* PhysicsCategory.swift in Sources */,
+				1BA41A9F24C646B8003EAEA4 /* BadFruit.swift in Sources */,
 				1B3193B224BA67BE00C6C87D /* GameViewController.swift in Sources */,
 				1B3193EB24BD43C100C6C87D /* GameOverScene.swift in Sources */,
 				1BA41A9D24C108CA003EAEA4 /* Fruit.swift in Sources */,

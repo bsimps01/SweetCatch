@@ -26,6 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreLabel.text = "Score: \(score)"
         }
     }
+    
     var livesArray: [SKSpriteNode]!
     
     public var backgroundMusicPlayer: AVAudioPlayer?
@@ -36,7 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createBasket()
         //createFruit()
         physicsWorld.contactDelegate = self
-        physicsWorld.gravity = CGVector(dx: 0, dy: -1.5)
+        physicsWorld.gravity = CGVector(dx: 0, dy: -5.8)
         let timeInterval = 0.75
         let timerInterval2 = 1.5
         
@@ -59,6 +60,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        }
         playBackgroundMusic("backgroundMusic.mp3")
         addLives()
+    }
+    
+    @objc func createBadApple(){
+        let badFruit = BadFruit()
+        let randomFruit = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.frame.size.width))
+        let position = CGFloat(randomFruit.nextInt())
+        
+        badFruit.position = CGPoint(x: position, y: self.frame.size.height + badFruit.size.height)
+        self.addChild(badFruit)
+    }
+    
+    @objc func addFruit(){
+        let fruit = Fruit()
+        let randomFruit = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.frame.size.width))
+        let position = CGFloat(randomFruit.nextInt())
+        
+        fruit.position = CGPoint(x: position, y: self.frame.size.height + fruit.size.height)
+        self.addChild(fruit)
     }
     
     func createBackground(){
@@ -116,42 +135,45 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    @objc func addFruit(){
-        
-        fruitCollection = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: fruitCollection) as! [String]
-        
-        let fruit = SKSpriteNode(imageNamed: fruitCollection[0])
-        let randomFruit = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.frame.size.width))
-        let position = CGFloat(randomFruit.nextInt())
-        
-        fruit.position = CGPoint(x: position, y: self.frame.size.height + fruit.size.height)
-        fruit.size = CGSize(width: 40, height: 40)
-        fruit.physicsBody = SKPhysicsBody(circleOfRadius: fruit.size.width/2)
-        fruit.physicsBody?.isDynamic = true
-        fruit.physicsBody?.categoryBitMask = fruitCategory
-        fruit.physicsBody?.collisionBitMask = 0
-        
-        fruit.physicsBody?.affectedByGravity = true
-        fruit.physicsBody?.categoryBitMask = PhysicsCategory.Fruit
-        fruit.physicsBody?.contactTestBitMask = PhysicsCategory.Basket
-        fruit.physicsBody?.collisionBitMask = PhysicsCategory.Basket
-        self.addChild(fruit)
-    }
+//    @objc func addFruit(){
+//
+//        fruitCollection = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: fruitCollection) as! [String]
+//
+//        let fruit = SKSpriteNode(imageNamed: fruitCollection[0])
+//        let randomFruit = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.frame.size.width))
+//        let position = CGFloat(randomFruit.nextInt())
+//
+//        fruit.position = CGPoint(x: position, y: self.frame.size.height + fruit.size.height)
+//        fruit.size = CGSize(width: 40, height: 40)
+//        fruit.physicsBody = SKPhysicsBody(circleOfRadius: fruit.size.width/2)
+//        fruit.physicsBody?.isDynamic = true
+//        fruit.physicsBody?.categoryBitMask = fruitCategory
+//        fruit.physicsBody?.collisionBitMask = 0
+//
+//        fruit.physicsBody?.affectedByGravity = true
+//        fruit.physicsBody?.categoryBitMask = PhysicsCategory.Fruit
+//        fruit.physicsBody?.contactTestBitMask = PhysicsCategory.Basket
+//        fruit.physicsBody?.collisionBitMask = PhysicsCategory.Basket
+//        self.addChild(fruit)
+//    }
+
     
-    @objc func createBadApple(){
-        let badFruit = SKSpriteNode(imageNamed: "rottenFruit")
-        let randomFruit = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.frame.size.width))
-        let position = CGFloat(randomFruit.nextInt())
-        
-        badFruit.position = CGPoint(x: position, y: self.frame.size.height + badFruit.size.height)
-        badFruit.size = CGSize(width: 50, height: 50)
-        badFruit.physicsBody = SKPhysicsBody(circleOfRadius: badFruit.size.width/2)
-        badFruit.physicsBody?.isDynamic = true
-        badFruit.physicsBody?.categoryBitMask = PhysicsCategory.BadFruit
-        badFruit.physicsBody?.contactTestBitMask = PhysicsCategory.Basket
-        badFruit.physicsBody?.collisionBitMask = PhysicsCategory.Basket
-        self.addChild(badFruit)
-    }
+//    @objc func createBadApple(){
+//        let badFruit = SKSpriteNode(imageNamed: "rottenFruit")
+//        let randomFruit = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.frame.size.width))
+//        let position = CGFloat(randomFruit.nextInt())
+//
+//        badFruit.position = CGPoint(x: position, y: self.frame.size.height + badFruit.size.height)
+//        badFruit.size = CGSize(width: 50, height: 50)
+//        badFruit.physicsBody = SKPhysicsBody(circleOfRadius: badFruit.size.width/2)
+//        badFruit.physicsBody?.isDynamic = true
+//        badFruit.physicsBody?.categoryBitMask = PhysicsCategory.BadFruit
+//        badFruit.physicsBody?.contactTestBitMask = PhysicsCategory.Basket
+//        badFruit.physicsBody?.collisionBitMask = PhysicsCategory.Basket
+//        self.addChild(badFruit)
+//    }
+    
+
     
     func didBegin(_ contact: SKPhysicsContact) {
 
