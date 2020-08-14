@@ -26,6 +26,8 @@
 		1B3193F724BE699500C6C87D /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3193F624BE699500C6C87D /* ButtonNode.swift */; };
 		1BA41A9D24C108CA003EAEA4 /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA41A9C24C108C9003EAEA4 /* Fruit.swift */; };
 		1BA41A9F24C646B8003EAEA4 /* BadFruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA41A9E24C646B8003EAEA4 /* BadFruit.swift */; };
+		1BA41AA124DCAB0C003EAEA4 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA41AA024DCAB0B003EAEA4 /* MenuScene.swift */; };
+		1BA41AA324DCAED0003EAEA4 /* InfoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA41AA224DCAED0003EAEA4 /* InfoScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		1B3193F624BE699500C6C87D /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		1BA41A9C24C108C9003EAEA4 /* Fruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
 		1BA41A9E24C646B8003EAEA4 /* BadFruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadFruit.swift; sourceTree = "<group>"; };
+		1BA41AA024DCAB0B003EAEA4 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		1BA41AA224DCAED0003EAEA4 /* InfoScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +174,8 @@
 			children = (
 				1B3193EA24BD43C100C6C87D /* GameOverScene.swift */,
 				1B3193AF24BA67BE00C6C87D /* GameScene.swift */,
+				1BA41AA024DCAB0B003EAEA4 /* MenuScene.swift */,
+				1BA41AA224DCAED0003EAEA4 /* InfoScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -322,9 +328,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BA41AA324DCAED0003EAEA4 /* InfoScene.swift in Sources */,
 				1B3193B024BA67BE00C6C87D /* GameScene.swift in Sources */,
 				1B3193E624BCED2600C6C87D /* PhysicsCategory.swift in Sources */,
 				1BA41A9F24C646B8003EAEA4 /* BadFruit.swift in Sources */,
+				1BA41AA124DCAB0C003EAEA4 /* MenuScene.swift in Sources */,
 				1B3193B224BA67BE00C6C87D /* GameViewController.swift in Sources */,
 				1B3193EB24BD43C100C6C87D /* GameOverScene.swift in Sources */,
 				1BA41A9D24C108CA003EAEA4 /* Fruit.swift in Sources */,
