@@ -12,7 +12,7 @@ import UIKit
 
 class InfoScene: SKScene {
     
-    var title = SKLabelNode(text: "Sweet Catch")
+    var title = SKSpriteNode(imageNamed: "SweetCatchLogo")
     var badFruit = SKSpriteNode(imageNamed: "rottenFruit")
     var lineOne: SKLabelNode!
     var lineTwo: SKLabelNode!
@@ -50,75 +50,81 @@ class InfoScene: SKScene {
     
     }
     
+    
     func createLabels(){
         addChild(title)
-        title.fontSize = 48.0
-        title.fontColor = SKColor.white
-        title.fontName = "Marker Felt Wide"
         title.zPosition = 3
-        title.position = CGPoint(x: size.width / 2, y: 600)
+        title.size = CGSize(width: 350, height: 275)
+        title.position = CGPoint(x: size.width / 2, y: size.height - 150)
         
-        lineOne = SKLabelNode(text: "-Catch all the different kinds of fruits to earn points")
+        lineOne = SKLabelNode(text: "- Catch all the different kinds of fruits to earn points")
         addChild(lineOne)
-        lineOne.fontSize = 16.0
-        lineOne.fontColor = SKColor.yellow
+        lineOne.fontSize = 24.0
+        lineOne.fontColor = SKColor.systemOrange
+        lineOne.color = .black
         lineOne.fontName = "Marker Felt"
         lineOne.zPosition = 3
-        lineOne.position = CGPoint(x: size.width / 2, y: 575)
+        lineOne.position = CGPoint(x: size.width / 2, y: size.height - 310)
+        lineOne.lineBreakMode = .byWordWrapping
+        lineOne.numberOfLines = 0
+        lineOne.preferredMaxLayoutWidth = 360
         
-        lineTwo = SKLabelNode(text: "-Use your finger to drag the basket side to side")
+        lineTwo = SKLabelNode(text: "- Use your finger to drag the basket side to side")
         addChild(lineTwo)
-        lineTwo.fontSize = 16.0
-        lineTwo.fontColor = SKColor.yellow
+        lineTwo.fontSize = 24.0
+        lineTwo.fontColor = SKColor.systemOrange
         lineTwo.fontName = "Marker Felt"
         lineTwo.zPosition = 3
-        lineTwo.position = CGPoint(x: size.width / 2, y: 525)
+        lineTwo.position = CGPoint(x: size.width / 2, y: size.height - 415)
+        lineTwo.lineBreakMode = .byWordWrapping
+        lineTwo.numberOfLines = 0
+        lineTwo.preferredMaxLayoutWidth = 360
         
-        lineThree = SKLabelNode(text: "-Avoid the bad fruit to not lose a life")
+        lineThree = SKLabelNode(text: "- Avoid the bad fruit to not lose a life")
         addChild(lineThree)
-        lineThree.fontSize = 16.0
-        lineThree.fontColor = SKColor.yellow
+        lineThree.fontSize = 24.0
+        lineThree.fontColor = SKColor.systemOrange
         lineThree.fontName = "Marker Felt"
         lineThree.zPosition = 3
-        lineThree.position = CGPoint(x: size.width / 2, y: 475)
+        lineThree.position = CGPoint(x: size.width / 2, y: size.height - 515)
+        lineThree.lineBreakMode = .byWordWrapping
+        lineThree.numberOfLines = 0
+        lineThree.preferredMaxLayoutWidth = 360
         
         orange.size = CGSize(width: 40, height: 40)
         orange.zPosition = 3
-        orange.position = CGPoint(x: size.width / 2 - 40, y: 560)
+        orange.position = CGPoint(x: size.width / 2 - 40, y: size.height - 330)
         addChild(orange)
         
         apple.size = CGSize(width: 40, height: 40)
         apple.zPosition = 3
-        apple.position = CGPoint(x: size.width / 2, y: 560)
+        apple.position = CGPoint(x: size.width / 2, y: size.height - 330)
         addChild(apple)
         
         banana.size = CGSize(width: 40, height: 40)
         banana.zPosition = 3
-        banana.position = CGPoint(x: size.width / 2 + 40, y: 560)
+        banana.position = CGPoint(x: size.width / 2 + 40, y: size.height - 330)
         addChild(banana)
         
         lime.size = CGSize(width: 40, height: 40)
         lime.zPosition = 3
-        lime.position = CGPoint(x: size.width / 2 + 80, y: 560)
+        lime.position = CGPoint(x: size.width / 2 + 80, y: size.height - 330)
         addChild(lime)
         
         strawberry.size = CGSize(width: 40, height: 40)
         strawberry.zPosition = 3
-        strawberry.position = CGPoint(x: size.width / 2 - 80, y: 560)
+        strawberry.position = CGPoint(x: size.width / 2 - 80, y: size.height - 330)
         addChild(strawberry)
         
-        basket.size = CGSize(width: 30, height: 30)
+        basket.size = CGSize(width: 50, height: 50)
         basket.zPosition = 3
-        basket.position = CGPoint(x: size.width / 2, y: 505)
+        basket.position = CGPoint(x: size.width / 2, y: size.height - 425)
         addChild(basket)
         
-        badFruit.size = CGSize(width: 40, height: 40)
+        badFruit.size = CGSize(width: 60, height: 60)
         badFruit.zPosition = 3
-        badFruit.position = CGPoint(x: size.width / 2, y: 450)
+        badFruit.position = CGPoint(x: size.width / 2, y: size.height - 525)
         addChild(badFruit)
-        
-        
-        
         
     }
 
@@ -129,9 +135,9 @@ class InfoScene: SKScene {
             
             let button = ButtonNode(normalTexture: buttonTexture, selectedTexture: buttonSelected, disabledTexture: buttonTexture)
             button.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(MenuScene.buttonTap))
-            button.setButtonLabel(title: "Back", font: "Marker Felt", fontSize: 20)
-            button.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
-            button.size = CGSize(width: 300, height: 100)
+            button.setButtonLabel(title: "Back", font: "Marker Felt", fontSize: 30)
+            button.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 275)
+            button.size = CGSize(width: 100, height: 100)
             button.zPosition = 4
             self.addChild(button)
             
@@ -146,4 +152,5 @@ class InfoScene: SKScene {
                 spriteview.presentScene(gameScene, transition: crossFade)
             }
         }
+    
 }

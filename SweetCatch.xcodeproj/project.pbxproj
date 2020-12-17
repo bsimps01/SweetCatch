@@ -24,10 +24,12 @@
 		1B3193F124BD4F2200C6C87D /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B3193F024BD4F2200C6C87D /* backgroundMusic.mp3 */; };
 		1B3193F324BD6F7B00C6C87D /* gameOverSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B3193F224BD6F7B00C6C87D /* gameOverSound.mp3 */; };
 		1B3193F724BE699500C6C87D /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3193F624BE699500C6C87D /* ButtonNode.swift */; };
+		1B8C19B9258B46B100CEC171 /* MyAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8C19B8258B46B100CEC171 /* MyAudioPlayer.swift */; };
 		1BA41A9D24C108CA003EAEA4 /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA41A9C24C108C9003EAEA4 /* Fruit.swift */; };
 		1BA41A9F24C646B8003EAEA4 /* BadFruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA41A9E24C646B8003EAEA4 /* BadFruit.swift */; };
 		1BA41AA124DCAB0C003EAEA4 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA41AA024DCAB0B003EAEA4 /* MenuScene.swift */; };
 		1BA41AA324DCAED0003EAEA4 /* InfoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA41AA224DCAED0003EAEA4 /* InfoScene.swift */; };
+		1BA42AE0254B62A20053297B /* menuMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1BA42ADF254B62A20053297B /* menuMusic.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,10 +73,12 @@
 		1B3193F024BD4F2200C6C87D /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
 		1B3193F224BD6F7B00C6C87D /* gameOverSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOverSound.mp3; sourceTree = "<group>"; };
 		1B3193F624BE699500C6C87D /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
+		1B8C19B8258B46B100CEC171 /* MyAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAudioPlayer.swift; sourceTree = "<group>"; };
 		1BA41A9C24C108C9003EAEA4 /* Fruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
 		1BA41A9E24C646B8003EAEA4 /* BadFruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadFruit.swift; sourceTree = "<group>"; };
 		1BA41AA024DCAB0B003EAEA4 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		1BA41AA224DCAED0003EAEA4 /* InfoScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoScene.swift; sourceTree = "<group>"; };
+		1BA42ADF254B62A20053297B /* menuMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = menuMusic.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,7 @@
 				1B3193EC24BD43CA00C6C87D /* Scenes */,
 				1B3193E724BCEE9300C6C87D /* Model */,
 				1B3193B124BA67BE00C6C87D /* GameViewController.swift */,
+				1B8C19B8258B46B100CEC171 /* MyAudioPlayer.swift */,
 				1B3193B324BA67BE00C6C87D /* Main.storyboard */,
 				1B3193B824BA67C100C6C87D /* LaunchScreen.storyboard */,
 				1B3193BB24BA67C100C6C87D /* Info.plist */,
@@ -183,6 +188,7 @@
 		1B3193ED24BD4D6500C6C87D /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				1BA42ADF254B62A20053297B /* menuMusic.mp3 */,
 				1B3193F224BD6F7B00C6C87D /* gameOverSound.mp3 */,
 				1B3193F024BD4F2200C6C87D /* backgroundMusic.mp3 */,
 				1B3193EE24BD4D9200C6C87D /* badFruitSound.mp3 */,
@@ -254,7 +260,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "Benjamin Simpson";
 				TargetAttributes = {
 					1B3193A524BA67BE00C6C87D = {
@@ -300,6 +306,7 @@
 				1B3193F124BD4F2200C6C87D /* backgroundMusic.mp3 in Resources */,
 				1B3193DE24BB9FB900C6C87D /* GameScene.sks in Resources */,
 				1B3193E924BCF9C300C6C87D /* basketPop.mp3 in Resources */,
+				1BA42AE0254B62A20053297B /* menuMusic.mp3 in Resources */,
 				1B3193B724BA67C100C6C87D /* Assets.xcassets in Resources */,
 				1B3193F324BD6F7B00C6C87D /* gameOverSound.mp3 in Resources */,
 				1B3193BA24BA67C100C6C87D /* LaunchScreen.storyboard in Resources */,
@@ -338,6 +345,7 @@
 				1BA41A9D24C108CA003EAEA4 /* Fruit.swift in Sources */,
 				1B3193AA24BA67BE00C6C87D /* AppDelegate.swift in Sources */,
 				1B3193F724BE699500C6C87D /* ButtonNode.swift in Sources */,
+				1B8C19B9258B46B100CEC171 /* MyAudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +426,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -478,6 +487,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -517,7 +527,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.makeschool.SweetCatch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Benjamin5311.SweetCatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -535,7 +545,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.makeschool.SweetCatch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Benjamin5311.SweetCatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

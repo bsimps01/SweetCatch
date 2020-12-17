@@ -15,6 +15,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var basket: SKSpriteNode!
     var scoreLabel: SKLabelNode!
+    var levelLabel: SKLabelNode!
     var fruitCollection = ["apple", "banana", "grapefruit", "lemon", "lime", "orange", "peach", "pear", "strawberry"]
     let fruitCategory: UInt32 = 0x1 << 1
     let badFruitCategory: UInt32 = 0x1 << 1
@@ -26,6 +27,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreLabel.text = "Score: \(score)"
         }
     }
+    var level: Int = 0 {
+        didSet {
+            levelLabel.text = "Level \(level)"
+        }
+    }
+    var timeInterval = 0.95
+    var timerInterval2 = 0.75
     
     var livesArray: [SKSpriteNode]!
     
@@ -38,8 +46,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //createFruit()
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector(dx: 0, dy: -5.8)
-        let timeInterval = 0.75
-        let timerInterval2 = 1.5
         
         gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addFruit), userInfo: nil, repeats: true)
         badGameTimer = Timer.scheduledTimer(timeInterval: timerInterval2, target: self, selector: #selector(createBadApple), userInfo: nil, repeats: true)
@@ -51,6 +57,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontColor = UIColor.yellow
         score = 0
         self.addChild(scoreLabel)
+        
+        levelLabel = SKLabelNode(text: "Level \(level)")
+        levelLabel.position = CGPoint(x: frame.midX, y: self.frame.size.height - 110)
+        levelLabel.fontSize = 42
+        levelLabel.fontColor = UIColor.purple
+        levelLabel.fontName = "Marker Felt Wide"
+        level = 1
+        
+        self.addChild(levelLabel)
 //        let backgroundMusic = SKAction.playSoundFileNamed("backgroundMusic.mp3", waitForCompletion: false)
 //         self.run(backgroundMusic)
         
@@ -60,6 +75,47 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        }
         playBackgroundMusic("backgroundMusic.mp3")
         addLives()
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        // Called before each frame is rendered
+        if self.score == 10 {
+            timeInterval = 1
+            timerInterval2 = 0.75
+            level = 2
+        }else if self.score == 30 {
+            timeInterval = 0.5
+            timerInterval2 = 0.75
+            level = 3
+        }else if self.score == 50 {
+            timeInterval = 0.5
+            timerInterval2 = 0.5
+            level = 4
+        }else if self.score == 70 {
+            timeInterval = 0.5
+            timerInterval2 = 0.3
+            level = 5
+        }else if self.score == 100 {
+            timeInterval = 0.3
+            timerInterval2 = 0.3
+            level = 6
+        }else if self.score == 150 {
+            timeInterval = 0.2
+            timerInterval2 = 0.2
+            level = 7
+        }else if self.score == 200 {
+            timeInterval = 0.2
+            timerInterval2 = 0.4
+            level = 8
+        }else if self.score == 300 {
+            timeInterval = 1
+            timerInterval2 = 0.2
+            level = 9
+        }else if self.score >= 400 {
+            timeInterval = 0.2
+            timerInterval2 = 0.2
+            level = 10
+        }
     }
     
     @objc func createBadApple(){
@@ -90,8 +146,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createBasket(){
         basket = SKSpriteNode(imageNamed: "basket")
-        basket.size = CGSize(width: 75, height: 70)
-        basket.position = CGPoint(x: 150, y: 50)
+        basket.size = CGSize(width: 90, height: 85)
+        basket.position = CGPoint(x: 150, y: 60)
         basket.physicsBody = SKPhysicsBody(circleOfRadius: basket.size.width/2)
         basket.physicsBody?.isDynamic = false
         basket.physicsBody?.categoryBitMask = PhysicsCategory.Basket
@@ -105,7 +161,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for live in 1...3 {
             let liveNode = SKSpriteNode(imageNamed: "basket")
             liveNode.size = CGSize(width: 25, height: 25)
-            liveNode.position = CGPoint(x: self.frame.size.width - CGFloat(4 - live) * liveNode.size.width, y: self.frame.size.height - 60)
+            liveNode.position = CGPoint(x: self.frame.size.width - CGFloat(4 - live) * liveNode.size.width, y: self.frame.size.height - 70)
             self.addChild(liveNode)
             livesArray.append(liveNode)
         }
@@ -216,10 +272,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             basket.position = CGPoint(x: location.x, y: 50)
         }
     }
-    
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
- 
-    }
+
 }
