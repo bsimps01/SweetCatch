@@ -54,7 +54,7 @@ class InfoScene: SKScene {
     func createLabels(){
         addChild(title)
         title.zPosition = 3
-        title.size = CGSize(width: 350, height: 275)
+        title.size = CGSize(width: 250, height: 175)
         title.position = CGPoint(x: size.width / 2, y: size.height - 150)
         
         lineOne = SKLabelNode(text: "- Catch all the different kinds of fruits to earn points")
