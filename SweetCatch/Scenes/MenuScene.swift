@@ -83,7 +83,7 @@ class MenuScene: SKScene {
             let button = ButtonNode(normalTexture: buttonTexture, selectedTexture: buttonSelected, disabledTexture: buttonTexture)
             button.setButtonAction(target: self, triggerEvent: .TouchUpInside, action: #selector(MenuScene.buttonTap))
             button.setButtonLabel(title: "Start Game", font: "Marker Felt", fontSize: 25)
-            button.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+            button.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 50)
             button.size = CGSize(width: 200, height: 200)
             button.zPosition = 4
             self.addChild(button)
